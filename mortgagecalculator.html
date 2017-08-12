@@ -1,11 +1,44 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body ng-app="">
+
+<div >
+  <form>
+    			<label>Principle Amount</label>
+				<input type="number" name=""  ng-model="pri"><br>
+				<label>Interest Rate</label>
+				<input type="number" name=""  ng-model="int"><br>
+					<label>Mortage Period In Years</label>
+				<input type="number" name=""  ng-model="yrs"><br>
+  </form>
+  <h1>You entered: {{pri}}</h1>
+  <h1>You entered: {{int}}</h1>
+  <h1>You entered: {{yrs}}</h1>
+  <h1>Year 1 Payment: {{pri/yrs + ((pri/yrs) * int/100)}}</h1>
+</div>
+</body>
+</html>
+
+<!--
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 </head>
-<body ng-app="">
-<h1>Mortgage Calculator</h1>
-	<form>
 
+<body ng-app="MortgageCalculator"  ng-controller="MortCal">
 
+	<h1>Mortgage Calculator</h1>
 
-	</form>
+			<form>
+
+					<label>Interest Rate</label>
+				<input type="text" name=""  ng-model="int"><br>
+					<label>Mortage Period In Years</label>
+				<input type="text" name=""  ng-model="yrs"><br>
+			</form>
+
+			<p>{{pri}}</p><br>
+			<p>{{int}}</p><br>
+			<p>{{yrs}}</p><br>
+
 </body>
