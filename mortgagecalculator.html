@@ -1,44 +1,35 @@
 <!DOCTYPE html>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<body ng-app="">
+<body ng-app="MortgageCalculator" ng-controller="mortcalc">
 
 <div >
   <form>
     			<label>Principle Amount</label>
-				<input type="number" name=""  ng-model="pri"><br>
+				<input type="number" name=""  ng-model="pri" value="10000"><br>
 				<label>Interest Rate</label>
-				<input type="number" name=""  ng-model="int"><br>
+				<input type="number" name=""  ng-model="int" value="5"><br>
 					<label>Mortage Period In Years</label>
-				<input type="number" name=""  ng-model="yrs"><br>
+				<select name="yrs"  ng-model="yrs">
+					<option ng-repeat="number in years" value="{{number}}"> {{number}} </option>
+				</select><br>
+
   </form>
-  <h1>You entered: {{pri}}</h1>
-  <h1>You entered: {{int}}</h1>
-  <h1>You entered: {{yrs}}</h1>
-  <h1>Year 1 Payment: {{pri/yrs + ((pri/yrs) * int/100)}}</h1>
+  <h1>Year 1 Payment: {{pri/yrs + (pri * int/100)}}</h1>
+  <h1>Year 1 Monthly Payment: {{(pri/yrs + (pri * int/100))/12}}</h1>
+  <h1 ng-repeat="number in years | limitTo: yrs-1:1" ngif="yrs>0">Year {{number}} Payment: {{(pri/yrs) + (pri - ((pri/yrs) * (number - 1)))*int/100}}<br>Year {{number}} Monthly Payment: {{((pri/yrs) + (pri - ((pri/yrs) * (number - 1)))*(int/100))/12}}</h1>
+
+  <!--<h1 ng-repeat="number in years | limitTo: yrs">Year {{number}} Payment: {{pri/yrs + ((pri - ((pri/yrs) * (number - 1)) int/100))}}</h1>-->
 </div>
 </body>
+
+
+
+<script>
+var app = angular.module('MortgageCalculator', []);
+
+app.controller('mortcalc', function($scope) {
+    $scope.years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+});
+</script>
 </html>
-
-<!--
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-</head>
-
-<body ng-app="MortgageCalculator"  ng-controller="MortCal">
-
-	<h1>Mortgage Calculator</h1>
-
-			<form>
-
-					<label>Interest Rate</label>
-				<input type="text" name=""  ng-model="int"><br>
-					<label>Mortage Period In Years</label>
-				<input type="text" name=""  ng-model="yrs"><br>
-			</form>
-
-			<p>{{pri}}</p><br>
-			<p>{{int}}</p><br>
-			<p>{{yrs}}</p><br>
-
-</body>
